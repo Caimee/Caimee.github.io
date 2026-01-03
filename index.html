@@ -147,6 +147,93 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/01/04/%E4%BB%8Efsm%E8%BF%9B%E9%98%B6%E5%88%B0hfsm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Modo">
+      <meta itemprop="description" content="A commit a day keeps boyfriend stay">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Modo's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/01/04/%E4%BB%8Efsm%E8%BF%9B%E9%98%B6%E5%88%B0hfsm/" class="post-title-link" itemprop="url">从FSM进阶到HFSM</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2026-01-04 03:13:51 / 修改时间：06:30:30" itemprop="dateCreated datePublished" datetime="2026-01-04T03:13:51+08:00">2026-01-04</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>*<em>祝生物钟倒转的三天新年快乐🎆</em></p>
+</blockquote>
+<hr>
+<p>基于上次的状态机：</p>
+<p><img src="/../images/pasted-1.png"></p>
+<p>之前说过我当时写出这个状态机时，是从最初的if-else重构过来的。</p>
+<p>所以当时新接触这个状态机时，我也尝试过从if-else的角度去反向理解这个教简单的状态机，然后误打误撞就发现这其实就是分层状态机（HFSM）的思想</p>
+<p><img src="/../images/pasted-2.png" alt="从if-else角度看状态机"></p>
+<p>事实上把陌生和友好两个状态合并起来就是对应着本的’false’,而逃跑状态则对应原本的’true’</p>
+<p>或者换句话说： <strong>if-else本身就是一种广义上的二元状态机</strong></p>
+<p>同时，在我们的这个例子中，我们用抽象的思维看，其实’陌生和友好’本身也是一个二元的状态机，它作为一个状态机被封装成了大的if-else二元状态机下的一个状态。</p>
+<p>也就是说：<br><strong>状态机中的状态可以是另一个状态机</strong></p>
+<p><strong>这也就是分层状态机HFSM</strong></p>
+<p>我们把之前的FSM重构为HFSM,它总体上大致长这样<br><img src="/../images/pasted-3.png" alt="粗略的HFSM"></p>
+<p>hfsm的运行逻辑是先进入父状态机，然后根据过渡条件选择对应的子状态机，再运行子状态机并进入子状态机下的状态。</p>
+<p>各层级内需要做好抽象屏障，子状态机的状态不应与父状态机的状态存在任何通信。</p>
+<p>以下是HFSM的一个通用模型</p>
+<p><img src="/../images/pasted-4.png"></p>
+<p>对于我们这个例子：</p>
+<p>父状态机是‘逃跑-不逃跑’，存在的子状态机是‘陌生-友好’。</p>
+<p>在由原先的FSM重构为HFSM的过程中，<br>状态之间原本都是直接通信<br>为了防止破坏层级抽象<br>实际上对于这个例子具体实现上需要一点特殊处理</p>
+<p><img src="/../images/pasted-5.png"></p>
+<p>即通过外部的一个中转Boolean来让‘不逃跑’跳转到‘逃跑’,而不是直接从‘友好’或者‘陌生’跳转到‘逃跑’。</p>
+<p>当然,需要这样去操作也说明在构建hfsm时‘友好’和‘陌生’就不适合被分到同一状态机下，而且这个例子其实也没必要使用HFSM，只是为了从FSM引出HFSM而已。</p>
+<p>HFSM真正的适用场景是在FSM的状态数量已经达到非常多时，难以管理，遂把各个小状态依据关联性分类并组装成一个个子状态机，然后嵌入到父状态机中，可以进行很多层的封装。</p>
+<ul>
+<li>代码实现可以参考<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/558422986">https://zhuanlan.zhihu.com/p/558422986</a></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2025/12/01/%E2%80%98%E5%85%B3%E4%BA%8Efsm%E7%8A%B6%E6%80%81%E6%9C%BA%E2%80%99/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -178,7 +265,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-12-18 03:29:32" itemprop="dateModified" datetime="2025-12-18T03:29:32+08:00">2025-12-18</time>
+                <time title="修改时间：2026-01-04 03:44:30" itemprop="dateModified" datetime="2026-01-04T03:44:30+08:00">2026-01-04</time>
               </span>
 
           
@@ -192,7 +279,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="本篇基于Modo在写Flee-On-Sight时的感想"><a href="#本篇基于Modo在写Flee-On-Sight时的感想" class="headerlink" title="本篇基于Modo在写Flee On Sight时的感想"></a>本篇基于Modo在写<a target="_blank" rel="noopener" href="https://modrinth.com/mod/flee-on-sight"><em>Flee On Sight</em></a>时的感想</h2><h3 id="对于较复杂的状态判断，有一种更好的方法"><a href="#对于较复杂的状态判断，有一种更好的方法" class="headerlink" title="对于较复杂的状态判断，有一种更好的方法"></a>对于较复杂的状态判断，有一种更好的方法</h3><h3 id="为什么不用if-else"><a href="#为什么不用if-else" class="headerlink" title="为什么不用if-else ?:"></a>为什么不用if-else ?:</h3><p>首先，对于大量子状态的判定会在这种boolean的判定中越来越冗长，如果是写了辅助方法来包装则会有层层嵌套的问题，而且对于几个不相关的子boolean强行包装成一个辅助boolean会导致可读性的问题，最终整个大的状态判定维护起来将会相当困难</p>
+          <h2 id="本篇基于Modo在写Flee-On-Sight时的感想"><a href="#本篇基于Modo在写Flee-On-Sight时的感想" class="headerlink" title="本篇基于Modo在写Flee On Sight时的感想"></a>本篇基于Modo在写<a target="_blank" rel="noopener" href="https://modrinth.com/mod/flee-on-sight"><em>Flee On Sight</em></a>时的感想</h2><h3 id="对于较复杂的状态判断，有一种更好的方法"><a href="#对于较复杂的状态判断，有一种更好的方法" class="headerlink" title="对于较复杂的状态判断，有一种更好的方法"></a>对于较复杂的状态判断，有一种更好的方法</h3><h4 id="为什么不用if-else"><a href="#为什么不用if-else" class="headerlink" title="为什么不用if-else ?:"></a>为什么不用if-else ?:</h4><p>首先，对于大量子状态的判定会在这种boolean的判定中越来越冗长，如果是写了辅助方法来包装则会有层层嵌套的问题，而且对于几个不相关的子boolean强行包装成一个辅助boolean会导致可读性的问题，最终整个大的状态判定维护起来将会相当困难</p>
 <p>同时，最最危险的一点在于if-else的各种子状态判定一旦存在耦合，会变得非常非常麻烦<br>举个例子，我们判断一只羊是否应该逃跑（记为isFleeing）, 假设isFleeing这个boolean由两个子状态A和B来判定：</p>
 <pre><code>A 代表空间判定（包含视角判定，空间距离判定）
 
@@ -203,8 +290,8 @@ B 代表食物引诱判定（即羊不应在受吸引时逃跑）
 <p>通常接下来你有两种常规的处理这玩意的思路：</p>
 <p>一种是打补丁，在A中嵌套B联合一些其他的空间状态判定，从而在耦合的那块地方强行用B覆盖A(假如决策系统稍微再复杂一点点甚至会需要A与B互相嵌套)，最终A与B之间的耦合度越来越高导致会严重破坏抽象，可以想象调试这个逻辑时在两个子状态判定之间反复横跳的场景。</p>
 <p>至于另一种思路，那就是强行拆散耦合，直接不要这两个较大的子状态，把他们拆散成一个个小的boolean判定，但这就没有封装了，可读性就不要想了，面对一堆boolean维护起来也是极其困难。</p>
-<h2 id="那么-，该到我们的FSM有限状态机登场了！"><a href="#那么-，该到我们的FSM有限状态机登场了！" class="headerlink" title="那么 ，该到我们的FSM有限状态机登场了！"></a>那么 ，该到我们的FSM有限状态机登场了！</h2><p>Modo被羊的if-else折磨得死来活去时，突然发现了状态机这个好东西</p>
-<h3 id="从羊的角度切入："><a href="#从羊的角度切入：" class="headerlink" title="从羊的角度切入："></a>从羊的角度切入：</h3><pre><code>    有限状态机相当于把羊赋予一个’状态‘，状态可以有有限个种类
+<h3 id="那么-，该到我们的FSM有限状态机登场了！"><a href="#那么-，该到我们的FSM有限状态机登场了！" class="headerlink" title="那么 ，该到我们的FSM有限状态机登场了！"></a>那么 ，该到我们的FSM有限状态机登场了！</h3><p>Modo被羊的if-else折磨得死来活去时，突然发现了状态机这个好东西</p>
+<h4 id="从羊的角度切入："><a href="#从羊的角度切入：" class="headerlink" title="从羊的角度切入："></a>从羊的角度切入：</h4><pre><code>    有限状态机相当于把羊赋予一个’状态‘，状态可以有有限个种类
 
     但是一只羊同时有且仅有一个状态
 
@@ -328,7 +415,7 @@ B 代表食物引诱判定（即羊不应在受吸引时逃跑）
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1</span>
+          <span class="site-state-item-count">2</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -356,7 +443,7 @@ B 代表食物引诱判定（即羊不应在受吸引时逃跑）
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2025</span>
+  <span itemprop="copyrightYear">2026</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

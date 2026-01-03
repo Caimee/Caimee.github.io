@@ -20,17 +20,25 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="A commit a day keeps boyfriend stay">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Modo&#39;s Blog">
-<meta property="og:url" content="http://example.com/archives/index.html">
+  <meta name="description" content="*祝生物钟倒转的三天新年快乐🎆   基于上次的状态机：  之前说过我当时写出这个状态机时，是从最初的if-else重构过来的。 所以当时新接触这个状态机时，我也尝试过从if-else的角度去反向理解这个教简单的状态机，然后误打误撞就发现这其实就是分层状态机（HFSM）的思想  事实上把陌生和友好两个状态合并起来就是对应着本的’false’,而逃跑状态则对应原本的’true’ 或者换句话说： i">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从FSM进阶到HFSM">
+<meta property="og:url" content="http://example.com/2026/01/04/%E4%BB%8Efsm%E8%BF%9B%E9%98%B6%E5%88%B0hfsm/index.html">
 <meta property="og:site_name" content="Modo&#39;s Blog">
-<meta property="og:description" content="A commit a day keeps boyfriend stay">
+<meta property="og:description" content="*祝生物钟倒转的三天新年快乐🎆   基于上次的状态机：  之前说过我当时写出这个状态机时，是从最初的if-else重构过来的。 所以当时新接触这个状态机时，我也尝试过从if-else的角度去反向理解这个教简单的状态机，然后误打误撞就发现这其实就是分层状态机（HFSM）的思想  事实上把陌生和友好两个状态合并起来就是对应着本的’false’,而逃跑状态则对应原本的’true’ 或者换句话说： i">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/pasted-1.png">
+<meta property="og:image" content="http://example.com/images/pasted-2.png">
+<meta property="og:image" content="http://example.com/images/pasted-3.png">
+<meta property="og:image" content="http://example.com/images/pasted-4.png">
+<meta property="og:image" content="http://example.com/images/pasted-5.png">
+<meta property="article:published_time" content="2026-01-03T19:13:51.000Z">
+<meta property="article:modified_time" content="2026-01-03T22:30:30.987Z">
 <meta property="article:author" content="Modo">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/pasted-1.png">
 
-<link rel="canonical" href="http://example.com/archives/">
+<link rel="canonical" href="http://example.com/2026/01/04/%E4%BB%8Efsm%E8%BF%9B%E9%98%B6%E5%88%B0hfsm/">
 
 
 <script id="page-configurations">
@@ -38,12 +46,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>归档 | Modo's Blog</title>
+  <title>从FSM进阶到HFSM | Modo's Blog</title>
   
 
 
@@ -141,73 +149,105 @@
         <div class="content-wrap">
           
 
-          <div class="content archive">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <span class="collection-header">嗯..! 目前共计 2 篇日志。 继续努力。</span>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/01/04/%E4%BB%8Efsm%E8%BF%9B%E9%98%B6%E5%88%B0hfsm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Modo">
+      <meta itemprop="description" content="A commit a day keeps boyfriend stay">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Modo's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          从FSM进阶到HFSM
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2026-01-04 03:13:51 / 修改时间：06:30:30" itemprop="dateCreated datePublished" datetime="2026-01-04T03:13:51+08:00">2026-01-04</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2026</span>
+        <blockquote>
+<p>*<em>祝生物钟倒转的三天新年快乐🎆</em></p>
+</blockquote>
+<hr>
+<p>基于上次的状态机：</p>
+<p><img src="/../images/pasted-1.png"></p>
+<p>之前说过我当时写出这个状态机时，是从最初的if-else重构过来的。</p>
+<p>所以当时新接触这个状态机时，我也尝试过从if-else的角度去反向理解这个教简单的状态机，然后误打误撞就发现这其实就是分层状态机（HFSM）的思想</p>
+<p><img src="/../images/pasted-2.png" alt="从if-else角度看状态机"></p>
+<p>事实上把陌生和友好两个状态合并起来就是对应着本的’false’,而逃跑状态则对应原本的’true’</p>
+<p>或者换句话说： <strong>if-else本身就是一种广义上的二元状态机</strong></p>
+<p>同时，在我们的这个例子中，我们用抽象的思维看，其实’陌生和友好’本身也是一个二元的状态机，它作为一个状态机被封装成了大的if-else二元状态机下的一个状态。</p>
+<p>也就是说：<br><strong>状态机中的状态可以是另一个状态机</strong></p>
+<p><strong>这也就是分层状态机HFSM</strong></p>
+<p>我们把之前的FSM重构为HFSM,它总体上大致长这样<br><img src="/../images/pasted-3.png" alt="粗略的HFSM"></p>
+<p>hfsm的运行逻辑是先进入父状态机，然后根据过渡条件选择对应的子状态机，再运行子状态机并进入子状态机下的状态。</p>
+<p>各层级内需要做好抽象屏障，子状态机的状态不应与父状态机的状态存在任何通信。</p>
+<p>以下是HFSM的一个通用模型</p>
+<p><img src="/../images/pasted-4.png"></p>
+<p>对于我们这个例子：</p>
+<p>父状态机是‘逃跑-不逃跑’，存在的子状态机是‘陌生-友好’。</p>
+<p>在由原先的FSM重构为HFSM的过程中，<br>状态之间原本都是直接通信<br>为了防止破坏层级抽象<br>实际上对于这个例子具体实现上需要一点特殊处理</p>
+<p><img src="/../images/pasted-5.png"></p>
+<p>即通过外部的一个中转Boolean来让‘不逃跑’跳转到‘逃跑’,而不是直接从‘友好’或者‘陌生’跳转到‘逃跑’。</p>
+<p>当然,需要这样去操作也说明在构建hfsm时‘友好’和‘陌生’就不适合被分到同一状态机下，而且这个例子其实也没必要使用HFSM，只是为了从FSM引出HFSM而已。</p>
+<p>HFSM真正的适用场景是在FSM的状态数量已经达到非常多时，难以管理，遂把各个小状态依据关联性分类并组装成一个个子状态机，然后嵌入到父状态机中，可以进行很多层的封装。</p>
+<ul>
+<li>代码实现可以参考<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/558422986">https://zhuanlan.zhihu.com/p/558422986</a></li>
+</ul>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2026-01-04T03:13:51+08:00"
-              content="2026-01-04">
-          01-04
-        </time>
-      </div>
+      <footer class="post-footer">
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2026/01/04/%E4%BB%8Efsm%E8%BF%9B%E9%98%B6%E5%88%B0hfsm/" itemprop="url">
-            <span itemprop="name">从FSM进阶到HFSM</span>
-          </a>
-      </div>
+        
 
-    </header>
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/12/01/%E2%80%98%E5%85%B3%E4%BA%8Efsm%E7%8A%B6%E6%80%81%E6%9C%BA%E2%80%99/" rel="prev" title="关于fsm状态机">
+      <i class="fa fa-chevron-left"></i> 关于fsm状态机
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
   </article>
-    <div class="collection-year">
-      <span class="collection-header">2025</span>
-    </div>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2025-12-01T02:50:00+08:00"
-              content="2025-12-01">
-          12-01
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2025/12/01/%E2%80%98%E5%85%B3%E4%BA%8Efsm%E7%8A%B6%E6%80%81%E6%9C%BA%E2%80%99/" itemprop="url">
-            <span itemprop="name">关于fsm状态机</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-
-    </div>
-  </div>
   
   
-  
-
   
 
 
