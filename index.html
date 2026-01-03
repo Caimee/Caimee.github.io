@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 8.1.1">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-96x96.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
   <meta name="description" content="Audentes Fortuna Iuvat!">
@@ -294,7 +294,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2026-01-04 06:55:19" itemprop="dateModified" datetime="2026-01-04T06:55:19+08:00">2026-01-04</time>
+                <time title="修改时间：2026-01-04 07:28:09" itemprop="dateModified" datetime="2026-01-04T07:28:09+08:00">2026-01-04</time>
               </span>
 
           
@@ -319,11 +319,11 @@ B 代表食物引诱判定（即羊不应在受吸引时逃跑）
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if (A &amp;&amp; B) &#123;</span><br><span class="line">    isFleeing = true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>然而事实是B中实际上嵌套了A中的部分空间逻辑🤓，这意味着 A 与 B 并不是两个独立条件，这就非常头疼了</p>
 <p>通常接下来你有两种常规的处理这玩意的思路：</p>
-<pre><code>    第一种是打补丁：在A中嵌套B联合一些其他的空间状态判定，从而在耦合的那块地方强行用B覆盖A(假如决策系统稍微再复杂一点点甚至会需要A与B互相嵌套)。
-    最终A与B之间的耦合度越来越高导致会严重破坏抽象，可以想象调试这个逻辑时在两个子状态判定之间反复横跳的场景。
+<pre><code>第一种是打补丁：在A中嵌套B联合一些其他的空间状态判定，从而在耦合的那块地方强行用B覆盖A(假如决策系统稍微再复杂一点点甚至会需要A与B互相嵌套)。
+最终A与B之间的耦合度越来越高导致会严重破坏抽象，可以想象调试这个逻辑时在两个子状态判定之间反复横跳的场景。
 
-    第二种是强行拆散耦合，直接不要这两个较大的子状态，把他们拆散成一个个小的boolean判定。
-    但这就没有封装了，可读性就不要想了，面对一堆boolean维护起来也是极其困难。
+第二种是强行拆散耦合，直接不要这两个较大的子状态，把他们拆散成一个个小的boolean判定。
+但这就没有封装了，可读性就不要想了，面对一堆boolean维护起来也是极其困难。
 </code></pre>
 <h3 id="那么-，该到我们的FSM有限状态机登场了！"><a href="#那么-，该到我们的FSM有限状态机登场了！" class="headerlink" title="那么 ，该到我们的FSM有限状态机登场了！"></a>那么 ，该到我们的FSM有限状态机登场了！</h3><p>Modo被羊的if-else折磨得死来活去时，突然发现了有限状态机FSM这个好东西</p>
 <h4 id="从羊的角度切入："><a href="#从羊的角度切入：" class="headerlink" title="从羊的角度切入："></a>从羊的角度切入：</h4><pre><code>    有限状态机相当于把羊赋予一个’状态‘，状态可以有有限个种类
@@ -356,7 +356,10 @@ B 代表食物引诱判定（即羊不应在受吸引时逃跑）
 <p>我们当然也可以用if-else去做到这件事，<br>但是比起用if-else系统，状态机的可读性和可维护性会好很多。</p>
 <p>实际上上述提到的这个羊的行为逻辑只是较规模小的一点实现，一旦决策系统更加庞大之后，状态机的优势就会更好地体现出来</p>
 <p>原因在于：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- 我们每时每刻只处于一个状态中</span><br><span class="line"></span><br><span class="line">- 我们只要管好局部每个状态时的进入和退出条件即可，可以忽略其他状态之间的交互细节，极大程度上降低了耦合度</span><br></pre></td></tr></table></figure>
+<pre><code>- 我们每时每刻只处于一个状态中
+
+- 我们只要管好局部每个状态时的进入和退出条件即可，可以忽略其他状态之间的交互细节，极大程度上降低了耦合度
+</code></pre>
 <h3 id="杂谈："><a href="#杂谈：" class="headerlink" title="杂谈："></a>杂谈：</h3><ul>
 <li><p>上述状态机的具体实现只是其中的一种简单形式， 在Java中即是使用enum配合switch来构成状态机，对于更重型的状态机，有更严谨和标准的方式通过接口来实现（一个真正意义上完整的状态机包含：状态，转换，和执行，其中执行可以在特定状态下也可以在转换时）</p>
 </li>
